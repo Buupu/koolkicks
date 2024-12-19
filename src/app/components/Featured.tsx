@@ -33,88 +33,111 @@ export default function Featured() {
         className={css({
           maxW: "1200px",
           mx: "auto",
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 8,
+          px: 4,
         })}
       >
-        {FEATURED_SHOES.map((shoe) => (
-          <div
-            key={shoe.name}
+        <div className={css({ textAlign: "center", mb: 16 })}>
+          <h2
             className={css({
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
-              bg: "zinc.900",
-              p: 6,
-              borderRadius: "xl",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              _hover: {
-                transform: "translateY(-8px)",
-              },
+              fontSize: { base: "3xl", md: "4xl", lg: "5xl" },
+              fontWeight: "bold",
+              mb: 4,
+              color: "white",
             })}
           >
+            SIGNATURE COLLECTION
+          </h2>
+          <p className={css({ color: "zinc.400", maxW: "2xl", mx: "auto" })}>
+            Level up your sneaker game with legendary silhouettes that dominate
+            both courts and streets.
+          </p>
+        </div>
+
+        <div
+          className={css({
+            display: "flex",
+            justifyContent: "space-between",
+            gap: 8,
+          })}
+        >
+          {FEATURED_SHOES.map((shoe) => (
             <div
+              key={shoe.name}
               className={css({
-                position: "relative",
-                width: "100%",
-                aspectRatio: "1",
+                flex: 1,
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
+                flexDirection: "column",
+                gap: 4,
+                bg: "zinc.900",
+                p: 6,
+                borderRadius: "xl",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                _hover: {
+                  transform: "translateY(-8px)",
+                },
               })}
             >
               <div
-                style={{ backgroundColor: shoe.bgColor }}
                 className={css({
-                  position: "absolute",
-                  width: "75%",
-                  height: "75%",
-                  borderRadius: "lg",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                })}
-              />
-              <img
-                src={shoe.image}
-                alt={shoe.name}
-                className={css({
-                  minW: "100%",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
                   position: "relative",
-                  zIndex: 1,
-                  transform: "rotate(-45deg) scale(1.3) translate(-5%, -5%)",
+                  width: "100%",
+                  aspectRatio: "1",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
                 })}
-              />
+              >
+                <div
+                  style={{ backgroundColor: shoe.bgColor }}
+                  className={css({
+                    position: "absolute",
+                    width: "75%",
+                    height: "75%",
+                    borderRadius: "lg",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  })}
+                />
+                <img
+                  src={shoe.image}
+                  alt={shoe.name}
+                  className={css({
+                    minW: "100%",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    position: "relative",
+                    zIndex: 1,
+                    transform: "rotate(-45deg) scale(1.3) translate(-5%, -5%)",
+                  })}
+                />
+              </div>
+              <h3
+                className={css({
+                  color: "white",
+                  fontSize: "2xl",
+                  fontWeight: "bold",
+                })}
+              >
+                {shoe.name}
+              </h3>
+              <a
+                className={css({
+                  color: "zinc.400",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  _hover: { color: "white" },
+                })}
+              >
+                Shop now <span>+</span>
+              </a>
             </div>
-            <h3
-              className={css({
-                color: "white",
-                fontSize: "2xl",
-                fontWeight: "bold",
-              })}
-            >
-              {shoe.name}
-            </h3>
-            <a
-              className={css({
-                color: "zinc.400",
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                _hover: { color: "white" },
-              })}
-            >
-              Shop now <span>+</span>
-            </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
