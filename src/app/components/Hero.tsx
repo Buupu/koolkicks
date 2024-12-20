@@ -5,6 +5,7 @@ import { vstack } from "../../../styled-system/patterns";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Button } from "react-aria-components";
+import Link from "next/link";
 
 export default function Hero() {
   const airRef = useRef(null);
@@ -75,24 +76,26 @@ export default function Hero() {
               filter: "brightness(0) invert(1)",
             })}
           />
-          <Button
-            className={css({
-              bg: "white",
-              color: "black",
-              px: 6,
-              py: 2,
-              borderRadius: "full",
-              fontWeight: "medium",
-              transition: "all 0.2s",
-              cursor: "pointer",
-              _hover: {
-                bg: "zinc.200",
-                transform: "translateY(-2px)",
-              },
-            })}
-          >
-            Shop Now
-          </Button>
+          <Link href="/shop">
+            <Button
+              className={css({
+                bg: "white",
+                color: "black",
+                px: 6,
+                py: 2,
+                borderRadius: "full",
+                fontWeight: "medium",
+                transition: "all 0.2s",
+                cursor: "pointer",
+                _hover: {
+                  bg: "zinc.200",
+                  transform: "translateY(-2px)",
+                },
+              })}
+            >
+              Shop Now
+            </Button>
+          </Link>
         </header>
         <div
           className={css({
@@ -115,7 +118,7 @@ export default function Hero() {
                 opacity: 1,
                 userSelect: "none",
                 textTransform: "uppercase",
-                lineHeight: 0.75,
+                lineHeight: 0.8,
                 zIndex: 3,
                 whiteSpace: "nowrap",
                 color: "white",
@@ -123,7 +126,7 @@ export default function Hero() {
                 transform: "translateY(100%)",
               })}
             >
-              AIR
+              KOOL
             </h1>
           </div>
           <div className={css({ overflow: "hidden", zIndex: 1, pt: 48 })}>
@@ -156,7 +159,7 @@ export default function Hero() {
                 },
               })}
             >
-              JORDAN
+              KICKS
             </h1>
             <div
               className={css({

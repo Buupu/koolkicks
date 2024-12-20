@@ -106,7 +106,7 @@ export default function Athletes() {
                   {athlete.position}
                 </p>
                 <p className={css({ color: "zinc.300", fontStyle: "italic" })}>
-                  "{athlete.quote}"
+                  &quot;{athlete.quote}&quot;
                 </p>
               </div>
               <div
