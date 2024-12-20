@@ -2,35 +2,62 @@
 
 import { css } from "../../../styled-system/css";
 import { vstack } from "../../../styled-system/patterns";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Button } from "react-aria-components";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const HeroShoeModel = dynamic(() => import("@/components/HeroShoeModel"), {
+  ssr: false,
+  loading: () => (
+    <div
+      className={css({
+        w: "full",
+        h: "full",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "white",
+      })}
+    >
+      Loading Model...
+    </div>
+  ),
+});
 
 export default function Hero() {
   const airRef = useRef(null);
   const jordanRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingComplete = () => {
+    console.log("Model loaded, setting isLoading to false");
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    // Create timeline for sequential animations
-    const tl = gsap.timeline();
+    if (!isLoading) {
+      // Create timeline for sequential animations
+      const tl = gsap.timeline();
 
-    // Animate "AIR"
-    tl.to(airRef.current, {
-      y: "0%",
-      duration: 0.6,
-      ease: "power2.out",
-      delay: 0.3,
-    });
+      tl.delay(1.5);
+      // Animate "KOOL"
+      tl.to(airRef.current, {
+        y: "0%",
+        duration: 0.6,
+        ease: "power2.out",
+      });
 
-    // Animate "JORDAN"
-    tl.to(jordanRef.current, {
-      y: "0%",
-      duration: 0.6,
-      ease: "power2.out",
-      delay: -0.2,
-    });
-  }, []);
+      // Animate "KICKS"
+      tl.to(jordanRef.current, {
+        y: "0%",
+        duration: 0.6,
+        ease: "power2.out",
+        delay: -0.2,
+      });
+    }
+  }, [isLoading]);
 
   return (
     <section
@@ -44,6 +71,8 @@ export default function Hero() {
         alignItems: "space-between",
         justifyContent: "center",
         overflow: "hidden",
+        opacity: isLoading ? 0 : 1,
+        transition: "opacity 0.5s ease-in-out",
       })}
     >
       <div
@@ -136,7 +165,11 @@ export default function Hero() {
                 textAlign: "center",
                 fontSize: { base: "6rem", md: "11rem", lg: "15rem" },
                 fontWeight: "900",
-                letterSpacing: { base: "1rem", md: "1.5rem", lg: "1.60rem" },
+                letterSpacing: {
+                  base: "1rem",
+                  md: "1.5rem",
+                  lg: "1.60rem",
+                },
                 opacity: 1,
                 userSelect: "none",
                 textTransform: "uppercase",
@@ -188,17 +221,7 @@ export default function Hero() {
                 zIndex: 4,
               })}
             >
-              <img
-                src="/shoe1.png"
-                alt="Featured Sneaker"
-                className={css({
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  position: "relative",
-                  zIndex: 2,
-                })}
-              />
+              <HeroShoeModel onLoadingComplete={handleLoadingComplete} />
             </div>
           </div>
         </div>
@@ -232,6 +255,23 @@ export default function Hero() {
           </svg>
         </div>
       </div>
+      {isLoading && (
+        <div
+          className={css({
+            position: "fixed",
+            inset: 0,
+            bg: "zinc.950",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            fontSize: "xl",
+            zIndex: 50,
+          })}
+        >
+          Loading Experience...
+        </div>
+      )}
     </section>
   );
 }
